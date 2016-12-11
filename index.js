@@ -7,7 +7,7 @@ module.exports = function(folderPathOrFilePath, cb){
   var stats = fs.statSync(folderPathOrFilePath)
   if (stats.isFile()) {
     var info = parseOne(folderPathOrFilePath)
-    return cb(info)
+    if(info) return info
   }
   
   if (stats.isDirectory()) {

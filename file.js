@@ -1,4 +1,4 @@
-require('.')('./t/controllers/basicctrl.js', function(result) {
-    console.log(result)
-})
+var result = require('.')('./t/controllers/basicctrl.js')
 
+
+console.log(result)
