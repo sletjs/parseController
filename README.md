@@ -1,6 +1,6 @@
 # parseController
 
-slet中工具模块，用于解析某个目录下的所有可用的controller
+slet中工具模块，用于解析某个目录下的所有可用的controller信息或某个文件的controller信息
 
 ## 用法1：获取某个文件信息
 
