@@ -2,10 +2,16 @@
 
 slet中工具模块，用于解析某个目录下的所有可用的controller信息或某个文件的controller信息
 
+## 安装
+
+```
+$ npm i -S parsecontroller
+```
+
 ## 用法1：获取某个文件的controller信息
 
 ```
-var result = require('parseController')('./t/controllers/basicctrl.js')
+var result = require('parsecontroller')('./t/controllers/basicctrl.js')
 
 console.log(result)
 ```
@@ -28,7 +34,7 @@ console.log(result)
 ## 用法2：获取某个目录的controller信息数组
 
 ```
-require('parseController')('./t', function(resultArray) {
+require('parsecontroller')('./t', function(resultArray) {
     console.log(result)
 })
 
