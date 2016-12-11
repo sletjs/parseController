@@ -5,7 +5,7 @@ slet中工具模块，用于解析某个目录下的所有可用的controller
 ## 用法
 
 ```
-require('.')('./t', function(resultArray) {
+require('parseController')('./t', function(resultArray) {
     console.log(result)
 })
 
