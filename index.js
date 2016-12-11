@@ -7,7 +7,8 @@ module.exports = function(folderPath, cb){
   dirw.walk(folderPath, 0, handleFile);
 
   var result = []
-  var i = 0
+  var i = 0;
+  
   function handleFile(path, floor, count) {
     i++
     if (/\.git/.test(path) || /node_modules/.test(path)) {
@@ -28,7 +29,7 @@ module.exports = function(folderPath, cb){
   }
 }
 
-
+// 解析单个Controller文件
 function parseOne(path) {
   var arr = fs.readFileSync(path).toString().split(/\r?\n/ig)
   // console.log(arr)
@@ -53,10 +54,8 @@ function parseOne(path) {
         if (info.length === 2) {
           var base = info[1].trim()
           var clz = info[0].replace('class','').trim()
-        
           // console.log(dep)
           // console.log(clz)
-          
           result.base = base
           result.clz = clz
           result.dep_controller = deptController(base)
