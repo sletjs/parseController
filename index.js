@@ -3,7 +3,45 @@ const EventEmitter = require('events');
 var fs = require('fs')
 var dirw = require('./src/dirw');
 
-module.exports = function(folderPath, cb){
+module.exports = function(folderPathOrFilePath, cb){
+  var stats = fs.statSync(folderPathOrFilePath)
+  if (stats.isFile()) {
+    var info = parseOne(folderPathOrFilePath)
+    return cb(info)
+  }
+  
+  if (stats.isDirectory()) {
+    return dir(folderPath, cb)
+  }
+}
+
+function file(folderPath, cb){
+  dirw.walk(folderPath, 0, handleFile);
+
+  var result = []
+  var i = 0;
+  
+  function handleFile(path, floor, count) {
+    i++
+    if (/\.git/.test(path) || /node_modules/.test(path)) {
+    
+    } else if (/\.js$/.test(path)) {
+      // console.log(path)
+      var info = parseOne(path)
+    
+      if (info) result.push(info)
+    } else{
+      // console.log('error')
+    }
+  
+    if (i == count && result && result.length > 0){
+      // console.dir(result)
+      cb(result)
+    }
+  }
+}
+
+function dir(folderPath, cb){
   dirw.walk(folderPath, 0, handleFile);
 
   var result = []
