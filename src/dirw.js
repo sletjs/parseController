@@ -14,6 +14,7 @@ function walk(path, floor, handleFile) {
 	handleFile(path, floor);
 	floor++;
 	fs.readdir(path, function(err, files) {
+    var count = files.length
 		if (err) {
 			console.log('read dir error');
 		} else {
@@ -26,7 +27,7 @@ function walk(path, floor, handleFile) {
 						if (stats.isDirectory()) {
 							walk(tmpPath, floor, handleFile);
 						} else {
-							handleFile(tmpPath, floor);
+							handleFile(tmpPath, floor, count);
 						}
 					}
 				})
