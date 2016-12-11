@@ -11,7 +11,7 @@ module.exports = function(folderPathOrFilePath, cb){
   }
   
   if (stats.isDirectory()) {
-    return dir(folderPath, cb)
+    return dir(folderPathOrFilePath, cb)
   }
 }
 
