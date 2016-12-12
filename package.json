@@ -18,6 +18,7 @@
   },
   "files": [
     "c.js",
+    "cli.js",
     "dept.js",
     "dir.js",
     "file.js",
