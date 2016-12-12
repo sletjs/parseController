@@ -10,7 +10,10 @@ handleFile 文件,文件夹处理函数
 
 */
 
-function walk(path, floor, handleFile) {
+function walk(path, floor, handleFile, cb) {
+  var list = []
+  var count = 0;
+  
 	handleFile(path, floor);
 	floor++;
 	fs.readdir(path, function(err, files) {
@@ -18,7 +21,7 @@ function walk(path, floor, handleFile) {
 		if (err) {
 			console.log('read dir error');
 		} else {
-			files.forEach(function(item) {
+			files.forEach(function(item, i) {
 				var tmpPath = path + '/' + item;
 				fs.stat(tmpPath, function(err1, stats) {
 					if (err1) {
@@ -27,8 +30,17 @@ function walk(path, floor, handleFile) {
 						if (stats.isDirectory()) {
 							walk(tmpPath, floor, handleFile);
 						} else {
+              list.push(tmpPath)
 							handleFile(tmpPath, floor, count);
 						}
+            
+            if ((i+1) === files.length) {
+              count--;
+            }
+            
+            if (count === 0) {
+              cb(list)
+            }
 					}
 				})
 			});
@@ -36,6 +48,7 @@ function walk(path, floor, handleFile) {
 		}
 	});
 }
+
 
 
 function dir(path, handleFile) {

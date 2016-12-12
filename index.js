@@ -1,7 +1,10 @@
 const EventEmitter = require('events');
 
 var fs = require('fs')
-var dirw = require('./src/dirw');
+var path = require('path');
+var rdl = require('rdl')
+
+var debug = require('debug')('parseController')
 
 module.exports = function(folderPathOrFilePath, cb){
   var stats = fs.statSync(folderPathOrFilePath)
@@ -11,7 +14,27 @@ module.exports = function(folderPathOrFilePath, cb){
   }
   
   if (stats.isDirectory()) {
-    return dir(folderPathOrFilePath, cb)
+    var result = []
+    // console.log('dir')
+    //return dir(folderPathOrFilePath, cb)
+    rdl(folderPathOrFilePath).then(function(files){
+      
+      files.forEach(function(file){
+        if (/\.git/.test(file) || /node_modules/.test(file)) {
+          debug('ignore = ' + file)
+        } else if (/\.js$/.test(file)) {
+          debug('file = ' + file)
+          var info = parseOne(file)
+          // console.log(info)
+          if (info) result.push(info)
+        } else{
+          debug('error ' + file)
+        }
+      })
+      // i++
+      cb(result)
+ //
+    })
   }
 }
 
@@ -22,37 +45,12 @@ function file(folderPath, cb){
   var i = 0;
   
   function handleFile(path, floor, count) {
+    console.log(path)
     i++
     if (/\.git/.test(path) || /node_modules/.test(path)) {
     
     } else if (/\.js$/.test(path)) {
-      // console.log(path)
-      var info = parseOne(path)
-    
-      if (info) result.push(info)
-    } else{
-      // console.log('error')
-    }
-  
-    if (i == count && result && result.length > 0){
-      // console.dir(result)
-      cb(result)
-    }
-  }
-}
-
-function dir(folderPath, cb){
-  dirw.walk(folderPath, 0, handleFile);
-
-  var result = []
-  var i = 0;
-  
-  function handleFile(path, floor, count) {
-    i++
-    if (/\.git/.test(path) || /node_modules/.test(path)) {
-    
-    } else if (/\.js$/.test(path)) {
-      // console.log(path)
+      console.log(path)
       var info = parseOne(path)
     
       if (info) result.push(info)
@@ -68,12 +66,11 @@ function dir(folderPath, cb){
 }
 
 // 解析单个Controller文件
-function parseOne(path) {
-  var arr = fs.readFileSync(path).toString().split(/\r?\n/ig)
-  // console.log(arr)
+function parseOne(file) {
+  var arr = fs.readFileSync(file).toString().split(/\r?\n/ig)
   
   var result = {
-    path: path
+    path: file
   }
   for (var i in arr) {
     var t = arr[i]

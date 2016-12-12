@@ -1,4 +1,4 @@
-require('.')('./t', function(result) {
+require('.')('./vendor/t', function(result) {
     console.log(result)
 })
 
