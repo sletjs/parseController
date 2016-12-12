@@ -1,19 +1,19 @@
 {
   "name": "parsecontroller",
   "version": "1.0.0",
-  "description": "",
+  "description": "slet中工具模块，用于解析某个目录下的所有可用的controller信息或某个文件的controller信息",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "i5ting",
+  "license": "MIT",
   "dependencies": {
     "debug": "^2.3.3",
     "rdl": "^1.0.3"
   },
   "files": [
-      "*.js"
-    ]
+    "c.js"  ,   "dept.js" , "dir.js" ,  "file.js" , "index.js"
+  ]
 }
