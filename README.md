@@ -60,3 +60,12 @@ require('parsecontroller')('./t', function(resultArray) {
     dep_controller: 'slet-basiccontroller' } ]
 ```
 
+## cli
+
+用于测试某个目录下的可用controller
+
+```
+$ npm i -g parsecontroller
+$ pc
+```
+
