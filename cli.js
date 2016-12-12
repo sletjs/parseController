@@ -8,7 +8,7 @@ argv.shift();
 var file_path = __dirname;
 var current_path = process.cwd();
 
+require('.')(current_path, function(resultArray) {
+    console.log(resultArray)
+})
 
-var result = require('.')(current_path)
-
-console.log(result)
