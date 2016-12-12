@@ -3,6 +3,9 @@
   "version": "1.0.1",
   "description": "slet中工具模块，用于解析某个目录下的所有可用的controller信息或某个文件的controller信息",
   "main": "index.js",
+  "bin":{
+    "pc": "cli.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
