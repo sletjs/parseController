@@ -13,7 +13,7 @@
   "author": "i5ting",
   "license": "MIT",
   "dependencies": {
-    "debug": "^2.3.3",
+    "debug": "^2.4.4",
     "rdl": "^1.0.3"
   },
   "files": [
